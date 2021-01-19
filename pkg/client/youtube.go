@@ -13,11 +13,16 @@ type Youtube struct {
 	query string
 
 	songs []shared.SongData
-	err   string
+	err   error
 }
 
 // Render ...
 func (c *Youtube) Render() app.UI {
+	err := ""
+	if c.err != nil {
+		err = c.err.Error()
+	}
+
 	return app.Div().Body(
 		app.H1().Text("Youtube!!!"),
 
@@ -52,38 +57,26 @@ func (c *Youtube) Render() app.UI {
 			),
 		),
 
-		app.If(c.err != "", app.Span().Text(c.err)),
+		app.If(err != "", app.Span().Text(err)),
 	)
 }
 
 func (c *Youtube) searchNormal() {
-	var response map[string][]shared.SongData
-	err := shared.Fetch("/search?query="+c.query, &response)
+	songs, err := shared.FetchSongs(c.query)
 
-	if err != nil {
-		c.err = err.Error()
-		c.Update()
-		return
-	}
+	c.err = err
+	c.songs = songs
 
-	c.songs = response["results"]
 	c.Update()
 }
 
 func (c *Youtube) searchGoRoutine() {
-	var response map[string][]shared.SongData
-	err := shared.Fetch("/search?query="+c.query, &response)
-
-	if err != nil {
-		app.Dispatch(func() {
-			c.err = err.Error()
-			c.Update()
-		})
-		return
-	}
+	songs, err := shared.FetchSongs("force error")
 
 	app.Dispatch(func() {
-		c.songs = response["results"]
+		c.err = err
+		c.songs = songs
+
 		c.Update()
 	})
 }

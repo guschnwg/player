@@ -4,28 +4,16 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
-	"time"
 )
 
 // Fetch ...
 func Fetch(url string, dst interface{}) error {
-	client := http.Client{
-		Timeout: time.Second * 10, // Timeout after 2 seconds
-	}
-
-	req, err := http.NewRequest(http.MethodGet, url, nil)
+	res, err := http.Get(url)
 	if err != nil {
 		return err
 	}
 
-	res, getErr := client.Do(req)
-	if getErr != nil {
-		return getErr
-	}
-
-	if res.Body != nil {
-		defer res.Body.Close()
-	}
+	defer res.Body.Close()
 
 	body, readErr := ioutil.ReadAll(res.Body)
 	if readErr != nil {
@@ -38,4 +26,17 @@ func Fetch(url string, dst interface{}) error {
 	}
 
 	return nil
+}
+
+// FetchSongs ...
+func FetchSongs(query string) ([]SongData, error) {
+	var response struct {
+		Results []SongData `json:"results"`
+	}
+	err := Fetch("/search?query="+query, &response)
+	if err != nil {
+		return []SongData{}, err
+	}
+
+	return response.Results, nil
 }
