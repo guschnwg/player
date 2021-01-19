@@ -71,7 +71,7 @@ func (c *Youtube) searchNormal() {
 }
 
 func (c *Youtube) searchGoRoutine() {
-	songs, err := shared.FetchSongs("force error")
+	songs, err := shared.FetchSongs(c.query)
 
 	app.Dispatch(func() {
 		c.err = err
