@@ -1,0 +1,14 @@
+appname: "go-app"
+output: ./../go-app.out
+watch_exts:
+    - .go
+watch_paths:
+    - ./
+cmd_args:
+build_args:
+envs:
+vendor_watch: false
+excluded_paths:
+build_pkg: ""
+build_tags: ""
+disable_run: false

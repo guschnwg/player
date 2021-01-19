@@ -1,0 +1,16 @@
+appname: "go-app"
+output: ./../server/web/app.wasm
+watch_exts:
+    - .go
+watch_paths:
+    - ./
+cmd_args:
+build_args:
+envs:
+    - GOARCH=wasm
+    - GOOS=js
+vendor_watch: false
+excluded_paths:
+build_pkg: ""
+build_tags: ""
+disable_run: false
