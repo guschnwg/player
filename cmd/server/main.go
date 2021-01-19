@@ -19,7 +19,7 @@ func main() {
 
 	http.HandleFunc("/test", server.Test)
 
-	http.HandleFunc("/query", server.Query)
+	http.HandleFunc("/search", server.Search)
 
 	err := http.ListenAndServe(":"+os.Getenv("PORT"), nil)
 	if err != nil {

@@ -49,8 +49,8 @@ func Test(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
-// Query ...
-func Query(w http.ResponseWriter, r *http.Request) {
+// Search ...
+func Search(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query().Get("query")
 	if query == "" {
 		query = "cats"
