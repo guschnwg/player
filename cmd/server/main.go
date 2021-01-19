@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/maxence-charriere/go-app/v7/pkg/app"
 
@@ -20,7 +21,7 @@ func main() {
 
 	http.HandleFunc("/query", server.Query)
 
-	err := http.ListenAndServe(":8000", nil)
+	err := http.ListenAndServe(":"+os.Getenv("PORT"), nil)
 	if err != nil {
 		log.Fatal(err)
 	}
