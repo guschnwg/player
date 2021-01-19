@@ -1,22 +1,16 @@
-.PHONY: client client_watch server server_watch docker_build
-
-clean:
-	rm -f go-app.out server/web/app.wasm web/app.wasm
+.PHONY: client client_watch server server_watch docker_build docker_run
 
 client:
-	cd client && GOARCH=wasm GOOS=js go build -o ./../web/app.wasm
+	GOARCH=wasm GOOS=js go build -o ./web/app.wasm cmd/client/main.go
 client_watch:
-	cd client && GOARCH=wasm GOOS=js gowatch
+	GOARCH=wasm GOOS=js gow build -v -o ./web/app.wasm cmd/client/main.go
 
 server:
-	cd server && go build -o ./../go-app.out
+	go run cmd/server/main.go
 server_watch:
-	cd server && gowatch
-
-run:
-	./go-app.out
+	gow run cmd/server/main.go
 
 docker_build:
 	docker build -t go-app .
 docker_run:
-	docker run -it -p 8000:8000 go-app
+	docker run -p 8000:8000 -v ${shell pwd}/:/app --name go-app -it go-app
