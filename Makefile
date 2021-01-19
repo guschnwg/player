@@ -14,3 +14,8 @@ docker_build:
 	docker build -t go-app .
 docker_run:
 	docker run -p 8000:8000 -v ${shell pwd}/:/app --name go-app -it -e PORT=8000 go-app
+
+heroku_push:
+	heroku container:push web
+heroku_deploy:
+	heroku container:release web
