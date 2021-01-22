@@ -21,6 +21,8 @@ func main() {
 
 	http.HandleFunc("/search", server.Search)
 
+	http.HandleFunc("/spotify/test", server.TestSpotify)
+
 	err := http.ListenAndServe(":"+os.Getenv("PORT"), nil)
 	if err != nil {
 		log.Fatal(err)

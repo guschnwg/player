@@ -3,7 +3,6 @@ package server
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"os/exec"
 	"strings"
@@ -14,13 +13,10 @@ import (
 // Test ...
 func Test(w http.ResponseWriter, r *http.Request) {
 	songURL := r.URL.Query().Get("song_url")
-	fmt.Println(songURL)
 
 	if songURL == "" {
 		songURL = "https://www.youtube.com/watch?v=lgjY-lVtJZA"
 	}
-
-	fmt.Println(songURL)
 
 	w.Header().Set("Content-Type", "application/json")
 
@@ -29,19 +25,19 @@ func Test(w http.ResponseWriter, r *http.Request) {
 	cmd.Stdout = &out
 	err := cmd.Run()
 	if err != nil {
-		fmt.Println(err.Error())
 		json.NewEncoder(w).Encode(map[string]interface{}{
 			"error": err.Error(),
 		})
+		return
 	}
 
 	var songData map[string]json.RawMessage
 	err = json.Unmarshal(out.Bytes(), &songData)
 	if err != nil {
-		fmt.Println(err.Error())
 		json.NewEncoder(w).Encode(map[string]interface{}{
 			"error": err.Error(),
 		})
+		return
 	}
 
 	json.NewEncoder(w).Encode(map[string]interface{}{
@@ -91,6 +87,7 @@ func Search(w http.ResponseWriter, r *http.Request) {
 			json.NewEncoder(w).Encode(map[string]interface{}{
 				"error": err.Error(),
 			})
+			return
 		}
 	}
 

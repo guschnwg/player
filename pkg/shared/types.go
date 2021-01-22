@@ -26,3 +26,9 @@ type SongData struct {
 		ACodec string `json:"acodec"`
 	} `json:"formats"`
 }
+
+// SpotifyPlaylistSong ...
+type SpotifyPlaylistSong struct {
+	Title  string `json:"title"`
+	Artist string `json:"artist"`
+}

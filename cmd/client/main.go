@@ -9,5 +9,6 @@ import (
 func main() {
 	app.Route("/", &client.Home{})
 	app.Route("/youtube", &client.Youtube{})
+	app.Route("/spotify", &client.Spotify{})
 	app.Run()
 }

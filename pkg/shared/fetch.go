@@ -40,3 +40,16 @@ func FetchSongs(query string) ([]SongData, error) {
 
 	return response.Results, nil
 }
+
+// FetchSpotifyPlaylist ...
+func FetchSpotifyPlaylist(query string) ([]SpotifyPlaylistSong, error) {
+	var response struct {
+		Results []SpotifyPlaylistSong `json:"results"`
+	}
+	err := Fetch("/spotify/test?query="+query, &response)
+	if err != nil {
+		return []SpotifyPlaylistSong{}, err
+	}
+
+	return response.Results, nil
+}
