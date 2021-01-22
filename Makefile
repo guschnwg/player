@@ -1,7 +1,7 @@
 .PHONY: client client_watch server server_watch docker_build docker_run
 
 client:
-	GOARCH=wasm GOOS=js go build -o ./web/app.wasm cmd/client/main.go
+	GOARCH=wasm GOOS=js go build -ldflags "-s -w" -o ./web/app.wasm cmd/client/main.go
 client_watch:
 	GOARCH=wasm GOOS=js gow build -v -o ./web/app.wasm cmd/client/main.go
 
