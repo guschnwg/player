@@ -11,6 +11,7 @@ func Menu(home string) app.UI {
 		app.A().Href("/").Text(home),
 		app.A().Href("/foo").Text("Foo!"),
 		app.A().Href("/youtube").Text("Youtube!"),
+		app.A().Href("/spotify").Text("Spotify!"),
 	)
 }
 
