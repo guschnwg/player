@@ -23,6 +23,8 @@ func main() {
 	http.HandleFunc("/search", server.Search)
 	http.HandleFunc("/spotify/test", server.TestSpotify)
 
+	server.BindProxy()
+
 	log.Println("Server running on port: " + port)
 
 	err := http.ListenAndServe(":"+port, nil)
