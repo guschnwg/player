@@ -12,4 +12,4 @@ WORKDIR /app
 RUN make client
 RUN make server
 
-CMD make run
+CMD PORT=${PORT} ./app.out
