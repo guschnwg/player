@@ -64,17 +64,23 @@ type SpotifySong struct {
 	app.Compo
 }
 
-// OnMount ...
-func (c *SpotifySong) OnMount(ctx app.Context) {
+// FetchSong ...
+func (c *SpotifySong) FetchSong() {
 	songs, err := shared.FetchSongs(c.Song.Title + " - " + c.Song.Artist)
 
-	c.err = err
+	app.Dispatch(func() {
+		c.err = err
+		if len(songs) > 0 {
+			c.song = songs[0]
+		}
+		c.Update()
+	})
+}
 
-	if len(songs) > 0 {
-		c.song = songs[0]
-	}
-
-	c.Update()
+// OnMount ...
+func (c *SpotifySong) OnMount(ctx app.Context) {
+	// This allows me to fire all at the same time!
+	go c.FetchSong()
 }
 
 // Render ...
