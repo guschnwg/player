@@ -15,7 +15,12 @@ type Song struct {
 
 // Render ...
 func (c *Song) Render() app.UI {
+	if c.Song.ID == "" {
+		return app.Div().Text("Loading")
+	}
+
 	format := c.Song.Formats[0]
+
 	for _, f := range c.Song.Formats {
 		if f.Ext == "mp4" && f.ACodec != "none" {
 			format = f
