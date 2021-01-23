@@ -6,14 +6,17 @@ client_watch:
 	GOARCH=wasm GOOS=js gow build -v -o ./web/app.wasm cmd/client/main.go
 
 server:
-	PORT=8000 go run cmd/server/main.go
+	go build -ldflags "-s -w" -o ./app.out cmd/server/main.go
 server_watch:
 	PORT=8000 gow run cmd/server/main.go
+
+run:
+	PORT=8000 ./app.out
 
 docker_build:
 	docker build -t go-app .
 docker_run:
-	docker run -p 8000:8000 -v ${shell pwd}/:/app --name go-app -it -e PORT=8000 go-app
+	docker run -p 8000:8000 --name go-app -it -e PORT=8000 --rm go-app
 
 heroku_push:
 	heroku container:push web

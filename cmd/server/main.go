@@ -11,6 +11,8 @@ import (
 )
 
 func main() {
+	port := os.Getenv("PORT")
+
 	http.Handle("/", &app.Handler{
 		Name:        "Hello",
 		Description: "An Hello World! example",
@@ -18,12 +20,12 @@ func main() {
 	})
 
 	http.HandleFunc("/test", server.Test)
-
 	http.HandleFunc("/search", server.Search)
-
 	http.HandleFunc("/spotify/test", server.TestSpotify)
 
-	err := http.ListenAndServe(":"+os.Getenv("PORT"), nil)
+	log.Println("Server running on port: " + port)
+
+	err := http.ListenAndServe(":"+port, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
