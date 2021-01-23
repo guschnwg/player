@@ -10,8 +10,6 @@ and more
 
 `make docker_run`
 
-You can `make client_watch` aswell.
-
 
 ## Not docker
 
