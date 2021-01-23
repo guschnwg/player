@@ -8,6 +8,8 @@ type SongData struct {
 
 	Title string `json:"title"`
 
+	Thumbnail string `json:"thumbnail"`
+
 	Thumbnails []struct {
 		ID     string `json:"id"`
 		URL    string `json:"url"`

@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"net/http"
+	"net/url"
 	"os/exec"
 	"strings"
 
@@ -25,6 +26,7 @@ func Test(w http.ResponseWriter, r *http.Request) {
 	cmd.Stdout = &out
 	err := cmd.Run()
 	if err != nil {
+		w.WriteHeader(500)
 		json.NewEncoder(w).Encode(map[string]interface{}{
 			"error": err.Error(),
 		})
@@ -34,6 +36,7 @@ func Test(w http.ResponseWriter, r *http.Request) {
 	var songData map[string]json.RawMessage
 	err = json.Unmarshal(out.Bytes(), &songData)
 	if err != nil {
+		w.WriteHeader(500)
 		json.NewEncoder(w).Encode(map[string]interface{}{
 			"error": err.Error(),
 		})
@@ -54,13 +57,12 @@ func Search(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 
-	cmd := exec.Command("youtube-dl", "--default-search", "ytsearch2:", "--skip-download", "--dump-json", "-4", query)
-
+	cmdData := exec.Command("youtube-dl", "--default-search", "ytsearch1:", "--skip-download", "--dump-json", "-4", url.QueryEscape(query))
 	var out bytes.Buffer
-	cmd.Stdout = &out
-
-	err := cmd.Run()
+	cmdData.Stdout = &out
+	err := cmdData.Run()
 	if err != nil {
+		w.WriteHeader(500)
 		json.NewEncoder(w).Encode(map[string]interface{}{
 			"error": err.Error(),
 		})
@@ -84,6 +86,7 @@ func Search(w http.ResponseWriter, r *http.Request) {
 		if err = json.Unmarshal([]byte(item), &song); err == nil {
 			songs = append(songs, song)
 		} else {
+			w.WriteHeader(500)
 			json.NewEncoder(w).Encode(map[string]interface{}{
 				"error": err.Error(),
 			})

@@ -19,18 +19,11 @@ func (c *Song) Render() app.UI {
 		return app.Div().Text("Loading")
 	}
 
-	format := c.Song.Formats[0]
-
-	for _, f := range c.Song.Formats {
-		if f.Ext == "mp4" && f.ACodec != "none" {
-			format = f
-			break
-		}
-	}
+	format := c.Song.Formats[len(c.Song.Formats)-1]
 
 	return app.Div().Body(
 		app.H4().Text(c.Song.Title),
 
-		app.Video().Controls(true).Src(format.URL),
+		app.Video().Controls(true).Poster(c.Song.Thumbnail).Src(format.URL),
 	)
 }
