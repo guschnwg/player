@@ -17,7 +17,7 @@ type songData struct {
 func TestSpotify(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query().Get("query")
 	if query == "" {
-		query = "http://go-colly.org/"
+		query = "https://open.spotify.com/playlist/30mIdIfINRKeT4QbJOk0Qf"
 	}
 
 	c := colly.NewCollector()
