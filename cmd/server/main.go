@@ -17,11 +17,16 @@ func main() {
 		Name:        "Hello",
 		Description: "An Hello World! example",
 		Title:       "Hello World!",
+		Styles: []string{
+			"https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css",
+			"/web/main.css",
+		},
 	})
 
 	http.HandleFunc("/test", server.Test)
 	http.HandleFunc("/search", server.Search)
 	http.HandleFunc("/spotify/test", server.TestSpotify)
+	http.HandleFunc("/lyrics/test", server.TestLyrics)
 
 	server.BindProxy()
 

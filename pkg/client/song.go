@@ -14,31 +14,45 @@ import (
 type Song struct {
 	app.Compo
 
-	Song shared.SongData
+	Song    shared.SongData
+	Lyrics  []string
+	OnEnded app.EventHandler
+
+	VideoElementID string
 }
 
 // Render ...
 func (c *Song) Render() app.UI {
-	if c.Song.ID == "" {
-		return app.Div().Text("Loading")
+	URL := c.getURL()
+
+	video := app.Video().ID(c.VideoElementID).Class("h-full w-full").Controls(true).Poster(c.Song.Thumbnail).Src(URL)
+	if c.OnEnded != nil {
+		video = video.OnEnded(c.OnEnded)
 	}
 
-	format := c.Song.Formats[len(c.Song.Formats)-1]
+	return app.Div().Class("rounded shadow border border-gray-800 flex my-5 h-56").Body(
+		app.Div().Class("w-1/3").Body(
+			video,
+		),
+		app.Div().Class("flex flex-col flex-1 p-4").Body(
+			app.H5().Class("font-bold mb-4 mt-0 text-white").Text(c.Song.Title),
 
-	URL := format.URL
-	parsedURL, _ := url.Parse(URL)
-
-	parsedURL.RawQuery += "&host=https://" + parsedURL.Host + "/"
-
-	// parsedURL.Scheme = "http"
-	parsedURL.Scheme = strings.Replace(js.Global().Get("location").Get("protocol").String(), ":", "", 1)
-
-	// parsedURL.Host = "localhost:8000"
-	parsedURL.Host = js.Global().Get("location").Get("host").String()
-
-	return app.Div().Body(
-		app.H4().Text(c.Song.Title),
-
-		app.Video().Controls(true).Poster(c.Song.Thumbnail).Src(parsedURL.String()),
+			app.Div().
+				Class("overflow-y-auto h-full").
+				Body(
+					app.Range(c.Lyrics).Slice(func(i int) app.UI {
+						return app.Div().Class("text-white").Style("min-height", "24px").Text(c.Lyrics[i])
+					}),
+				),
+		),
 	)
+}
+
+func (c *Song) getURL() string {
+	URL := c.Song.Formats[len(c.Song.Formats)-1].URL
+	parsedURL, _ := url.Parse(URL)
+	parsedURL.RawQuery += "&host=https://" + parsedURL.Host + "/"
+	parsedURL.Scheme = strings.Replace(js.Global().Get("location").Get("protocol").String(), ":", "", 1) // "http"
+	parsedURL.Host = js.Global().Get("location").Get("host").String()                                    // "localhost:8000"
+	return parsedURL.String()
 }

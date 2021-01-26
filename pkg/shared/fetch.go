@@ -53,3 +53,16 @@ func FetchSpotifyPlaylist(query string) ([]SpotifyPlaylistSong, error) {
 
 	return response.Results, nil
 }
+
+// FetchLyrics ...
+func FetchLyrics(query string) ([]string, error) {
+	var response struct {
+		Results []string `json:"results"`
+	}
+	err := Fetch("/lyrics/test?query="+query, &response)
+	if err != nil {
+		return []string{}, err
+	}
+
+	return response.Results, nil
+}
