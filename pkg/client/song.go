@@ -31,16 +31,17 @@ func (c *Song) Render() app.UI {
 
 	video.OnPlaying(func(ctx app.Context, e app.Event) {
 		c.isPlaying = true
-
 		c.Update()
 	})
 	video.OnEnded(func(ctx app.Context, e app.Event) {
 		c.isPlaying = false
-
 		if c.OnEnded != nil {
 			c.OnEnded(ctx, e)
 		}
-
+		c.Update()
+	})
+	video.OnPause(func(ctx app.Context, e app.Event) {
+		c.isPlaying = false
 		c.Update()
 	})
 
