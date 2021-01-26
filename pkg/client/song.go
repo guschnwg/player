@@ -18,6 +18,8 @@ type Song struct {
 	Lyrics  []string
 	OnEnded app.EventHandler
 
+	isPlaying bool
+
 	VideoElementID string
 }
 
@@ -26,11 +28,28 @@ func (c *Song) Render() app.UI {
 	URL := c.getURL()
 
 	video := app.Video().ID(c.VideoElementID).Class("h-full w-full").Controls(true).Poster(c.Song.Thumbnail).Src(URL)
-	if c.OnEnded != nil {
-		video = video.OnEnded(c.OnEnded)
+
+	video.OnPlaying(func(ctx app.Context, e app.Event) {
+		c.isPlaying = true
+
+		c.Update()
+	})
+	video.OnEnded(func(ctx app.Context, e app.Event) {
+		c.isPlaying = false
+
+		if c.OnEnded != nil {
+			c.OnEnded(ctx, e)
+		}
+
+		c.Update()
+	})
+
+	extraClasses := " "
+	if c.isPlaying {
+		extraClasses += "pulse-border "
 	}
 
-	return app.Div().Class("rounded shadow border border-gray-800 flex my-5 h-56").Body(
+	return app.Div().Class("rounded shadow border border-gray-800 flex my-5 h-56"+extraClasses).Body(
 		app.Div().Class("w-1/3").Body(
 			video,
 		),

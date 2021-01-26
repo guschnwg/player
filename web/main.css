@@ -2,3 +2,20 @@ html {
     height: 100%;
     background: black;
 }
+
+@keyframes pulse-border {
+    from {
+        border-color: #d6d6d6;
+        box-shadow: 1px 1px 20px 5px #d6d6d6;
+    }
+    to {
+        border-color: #2f2f2f;
+        box-shadow: 1px 1px 20px 5px #2f2f2f;
+    }
+}
+
+.pulse-border {
+    animation: pulse-border 2s infinite alternate;
+    border-width: 3px;
+    border-style: solid;
+}

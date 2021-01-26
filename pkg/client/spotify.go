@@ -131,7 +131,11 @@ func (c *SpotifySong) OnMount(ctx app.Context) {
 // Render ...
 func (c *SpotifySong) Render() app.UI {
 	if c.song.ID == "" {
-		return app.Div().Text("Loading " + c.Song.Title + " - " + c.Song.Artist)
+		return app.Div().
+			Class("rounded shadow border border-gray-800 flex my-5 h-56 justify-center items-center").
+			Body(
+				app.Span().Class("text-white").Text("Loading " + c.Song.Title + " - " + c.Song.Artist),
+			)
 	}
 
 	return &Song{
