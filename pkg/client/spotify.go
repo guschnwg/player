@@ -72,7 +72,7 @@ func (c *Spotify) RenderSongs() app.UI {
 }
 
 func (c *Spotify) crawlSpotify() {
-	songs, err := shared.FetchSpotifyPlaylist(c.query)
+	songs, err := FetchSpotifyPlaylist(c.query)
 
 	app.Dispatch(func() {
 		c.err = err
@@ -99,7 +99,7 @@ type SpotifySong struct {
 
 // FetchSong ...
 func (c *SpotifySong) FetchSong() {
-	songs, err := shared.FetchSongs(c.Song.Title + " - " + c.Song.Artist)
+	songs, err := FetchSongs(c.Song.Title + " - " + c.Song.Artist)
 
 	app.Dispatch(func() {
 		c.err = err
@@ -112,7 +112,7 @@ func (c *SpotifySong) FetchSong() {
 
 // FetchLyrics ...
 func (c *SpotifySong) FetchLyrics() {
-	lyrics, err := shared.FetchLyrics(c.Song.Title + " - " + c.Song.Artist)
+	lyrics, err := FetchLyrics(c.Song.Title + " - " + c.Song.Artist)
 
 	app.Dispatch(func() {
 		c.err = err

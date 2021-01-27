@@ -62,7 +62,7 @@ func (c *Youtube) Render() app.UI {
 }
 
 func (c *Youtube) searchNormal() {
-	songs, err := shared.FetchSongs(c.query)
+	songs, err := FetchSongs(c.query)
 
 	c.err = err
 	c.songs = songs
@@ -71,7 +71,7 @@ func (c *Youtube) searchNormal() {
 }
 
 func (c *Youtube) searchGoRoutine() {
-	songs, err := shared.FetchSongs(c.query)
+	songs, err := FetchSongs(c.query)
 
 	app.Dispatch(func() {
 		c.err = err

@@ -1,26 +1,27 @@
-package shared
+package client
 
 import (
+	"context"
 	"encoding/json"
-	"io/ioutil"
-	"net/http"
+	"time"
+
+	"github.com/guschnwg/player/pkg/shared"
+	fetch "marwan.io/wasm-fetch"
 )
 
 // Fetch ...
 func Fetch(url string, dst interface{}) error {
-	res, err := http.Get(url)
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*60)
+	defer cancel()
+	resp, err := fetch.Fetch(url, &fetch.Opts{
+		Method: fetch.MethodGet,
+		Signal: ctx,
+	})
 	if err != nil {
 		return err
 	}
 
-	defer res.Body.Close()
-
-	body, readErr := ioutil.ReadAll(res.Body)
-	if readErr != nil {
-		return readErr
-	}
-
-	jsonErr := json.Unmarshal(body, dst)
+	jsonErr := json.Unmarshal(resp.Body, dst)
 	if jsonErr != nil {
 		return jsonErr
 	}
@@ -29,26 +30,26 @@ func Fetch(url string, dst interface{}) error {
 }
 
 // FetchSongs ...
-func FetchSongs(query string) ([]SongData, error) {
+func FetchSongs(query string) ([]shared.SongData, error) {
 	var response struct {
-		Results []SongData `json:"results"`
+		Results []shared.SongData `json:"results"`
 	}
 	err := Fetch("/search?query="+query, &response)
 	if err != nil {
-		return []SongData{}, err
+		return []shared.SongData{}, err
 	}
 
 	return response.Results, nil
 }
 
 // FetchSpotifyPlaylist ...
-func FetchSpotifyPlaylist(query string) ([]SpotifyPlaylistSong, error) {
+func FetchSpotifyPlaylist(query string) ([]shared.SpotifyPlaylistSong, error) {
 	var response struct {
-		Results []SpotifyPlaylistSong `json:"results"`
+		Results []shared.SpotifyPlaylistSong `json:"results"`
 	}
 	err := Fetch("/spotify/test?query="+query, &response)
 	if err != nil {
-		return []SpotifyPlaylistSong{}, err
+		return []shared.SpotifyPlaylistSong{}, err
 	}
 
 	return response.Results, nil

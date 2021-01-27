@@ -13,4 +13,5 @@ require (
 	golang.org/x/text v0.3.5 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/protobuf v1.25.0 // indirect
+	marwan.io/wasm-fetch v0.1.0
 )

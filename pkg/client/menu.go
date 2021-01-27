@@ -1,7 +1,6 @@
 package client
 
 import (
-	"github.com/guschnwg/player/pkg/shared"
 	"github.com/maxence-charriere/go-app/v7/pkg/app"
 )
 
@@ -27,7 +26,7 @@ type MenuAsCompo struct {
 
 // OnMount ...
 func (h *MenuAsCompo) OnMount(ctx app.Context) {
-	advice, _ := shared.FetchAdvice("https://api.adviceslip.com/advice")
+	advice, _ := FetchAdvice("https://api.adviceslip.com/advice")
 	h.advice = advice
 	h.Update()
 }
