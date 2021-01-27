@@ -1,4 +1,4 @@
-FROM golang:1.14.1 AS base
+FROM golang:1.15.7 AS base
 
 ENV PORT 8000
 
