@@ -27,19 +27,8 @@ type MenuAsCompo struct {
 
 // OnMount ...
 func (h *MenuAsCompo) OnMount(ctx app.Context) {
-	resp := struct {
-		Slip struct {
-			ID     int    `json:"id"`
-			Advice string `json:"advice"`
-		} `json:"slip"`
-	}{}
-
-	err := shared.Fetch("https://api.adviceslip.com/advice", &resp)
-	if err != nil {
-		return
-	}
-
-	h.advice = resp.Slip.Advice
+	advice, _ := shared.FetchAdvice("https://api.adviceslip.com/advice")
+	h.advice = advice
 	h.Update()
 }
 

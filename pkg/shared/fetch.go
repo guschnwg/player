@@ -66,3 +66,20 @@ func FetchLyrics(query string) ([]string, error) {
 
 	return response.Results, nil
 }
+
+// FetchAdvice ...
+func FetchAdvice(query string) (string, error) {
+	var response struct {
+		Slip struct {
+			ID     int    `json:"id"`
+			Advice string `json:"advice"`
+		} `json:"slip"`
+	}
+
+	err := Fetch("https://api.adviceslip.com/advice", &response)
+	if err != nil {
+		return "", err
+	}
+
+	return response.Slip.Advice, nil
+}
