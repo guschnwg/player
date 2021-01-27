@@ -2,7 +2,6 @@ package server
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 
 	colly "github.com/gocolly/colly/v2"
@@ -37,7 +36,7 @@ func TestSpotify(w http.ResponseWriter, r *http.Request) {
 	})
 
 	c.OnRequest(func(r *colly.Request) {
-		fmt.Println("Visiting", r.URL)
+		print("Visiting " + r.URL.String())
 	})
 
 	err := c.Visit(query)

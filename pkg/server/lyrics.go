@@ -2,7 +2,6 @@ package server
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"strings"
 
@@ -28,7 +27,7 @@ func TestLyrics(w http.ResponseWriter, r *http.Request) {
 	})
 
 	c.OnRequest(func(r *colly.Request) {
-		fmt.Println("Visiting", r.URL)
+		print("Visiting " + r.URL.String())
 	})
 
 	URL := "http://www.songlyrics.com/index.php?section=search&searchW=" + strings.ReplaceAll(query, " ", "+") + "&submit=Search&searchIn1=artist&searchIn2=album&searchIn3=song&searchIn4=lyrics"

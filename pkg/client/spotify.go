@@ -1,7 +1,7 @@
 package client
 
 import (
-	"fmt"
+	"strconv"
 
 	"github.com/guschnwg/player/pkg/shared"
 	"github.com/maxence-charriere/go-app/v7/pkg/app"
@@ -56,13 +56,13 @@ func (c *Spotify) RenderSongs() app.UI {
 	return app.Div().Body(
 		app.Range(c.songs).Slice(func(i int) app.UI {
 			return &SpotifySong{
-				VideoElementID: fmt.Sprintf("my-video-%d", i),
+				VideoElementID: "my-video-" + strconv.Itoa(i),
 				Song:           c.songs[i],
 				OnEnded: func(ctx app.Context, e app.Event) {
 					if i+1 < len(c.songs) {
 						elem := app.Window().
 							Get("document").
-							Call("getElementById", fmt.Sprintf("my-video-%d", i+1))
+							Call("getElementById", "my-video-"+strconv.Itoa(i+1))
 						elem.Call("play")
 					}
 				},
