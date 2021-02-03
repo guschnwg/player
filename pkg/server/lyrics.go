@@ -10,6 +10,8 @@ import (
 
 // TestLyrics ...
 func TestLyrics(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w, r)
+
 	query := r.URL.Query().Get("query")
 	if query == "" {
 		query = "Teste"
@@ -33,6 +35,7 @@ func TestLyrics(w http.ResponseWriter, r *http.Request) {
 	URL := "http://www.songlyrics.com/index.php?section=search&searchW=" + strings.ReplaceAll(query, " ", "+") + "&submit=Search&searchIn1=artist&searchIn2=album&searchIn3=song&searchIn4=lyrics"
 	err := c.Visit(URL)
 	if err != nil {
+		w.WriteHeader(500)
 		json.NewEncoder(w).Encode(map[string]interface{}{
 			"error": err.Error(),
 		})

@@ -14,6 +14,8 @@ const baseURL = "https://www.beatport.com"
 
 // TestBeatport ...
 func TestBeatport(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w, r)
+
 	query := r.URL.Query().Get("query")
 	if query == "" {
 		query = "Eats Everything - Space Raiders (Charlotte de Witte Remix)"
@@ -43,6 +45,7 @@ func TestBeatport(w http.ResponseWriter, r *http.Request) {
 
 	err := c.Visit(baseURL + "/search?q=" + url.QueryEscape(query))
 	if err != nil {
+		w.WriteHeader(500)
 		json.NewEncoder(w).Encode(map[string]interface{}{
 			"error": err.Error(),
 		})

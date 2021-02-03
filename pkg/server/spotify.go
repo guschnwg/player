@@ -14,6 +14,8 @@ type songData struct {
 
 // TestSpotify ...
 func TestSpotify(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w, r)
+
 	query := r.URL.Query().Get("query")
 	if query == "" {
 		query = "https://open.spotify.com/playlist/30mIdIfINRKeT4QbJOk0Qf"
@@ -41,6 +43,7 @@ func TestSpotify(w http.ResponseWriter, r *http.Request) {
 
 	err := c.Visit(query)
 	if err != nil {
+		w.WriteHeader(500)
 		json.NewEncoder(w).Encode(map[string]interface{}{
 			"error": err.Error(),
 		})

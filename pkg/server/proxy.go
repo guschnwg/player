@@ -46,6 +46,8 @@ func BindProxy() {
 	}
 
 	http.HandleFunc("/videoplayback", func(w http.ResponseWriter, r *http.Request) {
+		enableCors(&w, r)
+
 		proxy.ServeHTTP(w, r)
 	})
 }

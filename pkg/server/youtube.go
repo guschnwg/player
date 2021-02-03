@@ -13,6 +13,8 @@ import (
 
 // Test ...
 func Test(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w, r)
+
 	songURL := r.URL.Query().Get("song_url")
 
 	if songURL == "" {
@@ -50,6 +52,8 @@ func Test(w http.ResponseWriter, r *http.Request) {
 
 // Search ...
 func Search(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w, r)
+
 	query := r.URL.Query().Get("query")
 	if query == "" {
 		query = "cats"
