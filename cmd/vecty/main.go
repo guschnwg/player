@@ -10,21 +10,6 @@ import (
 	"github.com/hexops/vecty/prop"
 )
 
-type Component struct {
-	vecty.Core
-}
-
-func (c *Component) Copy() vecty.Component {
-	cpy := *c
-	return &cpy
-}
-
-func (c *Component) Render() vecty.ComponentOrHTML {
-	return nil
-}
-
-//
-
 func main() {
 	vecty.SetTitle("Hello Vecty!")
 	vecty.RenderBody(&PageView{})
@@ -34,7 +19,7 @@ func main() {
 type PageView struct {
 	count int
 
-	Component
+	vecty.Core
 }
 
 func (p *PageView) onClick(event *vecty.Event) {
