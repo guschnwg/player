@@ -3,7 +3,6 @@ package server
 import (
 	"context"
 	"encoding/json"
-	"errors"
 	"log"
 	"net/http"
 
@@ -65,7 +64,6 @@ func (h *HelloWorld) OnIntent(ctx context.Context, request *alexa.Request, sessi
 
 		log.Printf("Set Output speech, value now: %s", response.OutputSpeech.Text)
 	case "SongPlayerIntent":
-		// response.OutputSpeech.Type = "AudioPlayer.Play"
 		response.AddAudioPlayer(
 			"AudioPlayer.Play",
 			"REPLACE_ALL",
@@ -80,8 +78,27 @@ func (h *HelloWorld) OnIntent(ctx context.Context, request *alexa.Request, sessi
 		response.SetSimpleCard("HelloWorld", speechText)
 		response.SetOutputText(speechText)
 		response.SetRepromptText(speechText)
+	case "AMAZON.StopIntent":
+		response.SetOutputText("Parar")
+		response.Directives = append(response.Directives, alexa.AudioPlayerDirective{
+			Type: "AudioPlayer.Stop",
+		})
+	case "AMAZON.PauseIntent":
+		response.Directives = append(response.Directives, alexa.AudioPlayerDirective{
+			Type: "AudioPlayer.Stop",
+		})
+		response.SetOutputText("Pausar")
+	case "AMAZON.ResumeIntent":
+		response.AddAudioPlayer(
+			"AudioPlayer.Play",
+			"REPLACE_ALL",
+			"testinho",
+			"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+			50000,
+		)
+		response.SetOutputText("Continuar")
 	default:
-		return errors.New("Invalid Intent")
+		response.SetOutputText("Sei lá o que você quer")
 	}
 
 	return nil
