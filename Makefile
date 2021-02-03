@@ -30,7 +30,7 @@ heroku_logs:
 	heroku logs --tail
 
 vecty_gh_pages:
-	GOARCH=wasm GOOS=js go build -ldflags "-s -w" -o ./gh-pages/app.wasm cmd/vecty/main.go
+	GOARCH=wasm GOOS=js tinygo build -o ./gh-pages/app.wasm cmd/vecty/main.go
 
 	git add -A
 	git commit --allow-empty -m "Deploy"
