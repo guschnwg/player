@@ -29,10 +29,10 @@ heroku_deploy:
 heroku_logs:
 	heroku logs --tail
 
-vecty_gh_pages:
+vecty_build:
 	GOARCH=wasm GOOS=js go build -ldflags "-s -w" -o ./gh-pages/vecty.wasm cmd/vecty/main.go
 
-vugu_gh_pages:
+vugu_build:
 	go generate cmd/vugu/generate.go
 
 	GOARCH=wasm GOOS=js go build -ldflags "-s -w" -o ./gh-pages/vugu.wasm cmd/vugu/main_wasm.go cmd/vugu/*_vgen.go
