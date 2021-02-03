@@ -68,6 +68,19 @@ func FetchLyrics(query string) ([]string, error) {
 	return response.Results, nil
 }
 
+// FetchBeatport ...
+func FetchBeatport(query string) (shared.BeatportData, error) {
+	var response struct {
+		Results shared.BeatportData `json:"results"`
+	}
+	err := Fetch("/beatport/test?query="+query, &response)
+	if err != nil {
+		return shared.BeatportData{}, err
+	}
+
+	return response.Results, nil
+}
+
 // FetchAdvice ...
 func FetchAdvice(query string) (string, error) {
 	var response struct {

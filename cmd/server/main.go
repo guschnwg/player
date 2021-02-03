@@ -27,6 +27,7 @@ func main() {
 	http.HandleFunc("/search", server.Search)
 	http.HandleFunc("/spotify/test", server.TestSpotify)
 	http.HandleFunc("/lyrics/test", server.TestLyrics)
+	http.HandleFunc("/beatport/test", server.TestBeatport)
 
 	server.BindProxy()
 

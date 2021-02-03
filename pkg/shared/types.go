@@ -34,3 +34,9 @@ type SpotifyPlaylistSong struct {
 	Title  string `json:"title"`
 	Artist string `json:"artist"`
 }
+
+// BeatportData ...
+type BeatportData struct {
+	Genre string `json:"genre"`
+	BPM   string `json:"bpm"`
+}

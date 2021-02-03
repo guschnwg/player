@@ -14,9 +14,10 @@ import (
 type Song struct {
 	app.Compo
 
-	Song    shared.SongData
-	Lyrics  []string
-	OnEnded app.EventHandler
+	Song     shared.SongData
+	Lyrics   []string
+	Beatport shared.BeatportData
+	OnEnded  app.EventHandler
 
 	isPlaying bool
 
@@ -57,6 +58,8 @@ func (c *Song) Render() app.UI {
 		app.Div().Class("flex flex-col flex-1 p-4").Body(
 			app.H5().Class("font-bold mb-4 mt-0 text-white").Text(c.Song.Title),
 
+			c.beatportInfo(),
+
 			app.Div().
 				Class("overflow-y-auto h-full").
 				Body(
@@ -65,6 +68,17 @@ func (c *Song) Render() app.UI {
 					}),
 				),
 		),
+	)
+}
+
+func (c *Song) beatportInfo() app.UI {
+	if c.Beatport.BPM == "" || c.Beatport.Genre == "" {
+		return nil
+	}
+
+	return app.Div().Class("text-white mb-5 text-sm").Body(
+		app.Span().Text("Genre: "+c.Beatport.Genre),
+		app.Span().Class("ml-5").Text("BPM: "+c.Beatport.BPM),
 	)
 }
 

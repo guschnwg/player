@@ -90,9 +90,10 @@ type SpotifySong struct {
 	Song           shared.SpotifyPlaylistSong
 	OnEnded        app.EventHandler
 
-	err    error
-	song   shared.SongData
-	lyrics []string
+	err      error
+	song     shared.SongData
+	lyrics   []string
+	beatport shared.BeatportData
 
 	app.Compo
 }
@@ -121,11 +122,23 @@ func (c *SpotifySong) FetchLyrics() {
 	})
 }
 
+// FetchBeatport ...
+func (c *SpotifySong) FetchBeatport() {
+	beatport, err := FetchBeatport(c.Song.Title + " - " + c.Song.Artist)
+
+	app.Dispatch(func() {
+		c.err = err
+		c.beatport = beatport
+		c.Update()
+	})
+}
+
 // OnMount ...
 func (c *SpotifySong) OnMount(ctx app.Context) {
 	// This allows me to fire all at the same time!
 	go c.FetchSong()
 	go c.FetchLyrics()
+	go c.FetchBeatport()
 }
 
 // Render ...
@@ -141,6 +154,7 @@ func (c *SpotifySong) Render() app.UI {
 	return &Song{
 		Song:           c.song,
 		Lyrics:         c.lyrics,
+		Beatport:       c.beatport,
 		VideoElementID: c.VideoElementID,
 		OnEnded:        c.OnEnded,
 	}
