@@ -30,4 +30,10 @@ heroku_logs:
 	heroku logs --tail
 
 vecty_gh_pages:
-	echo "Not implemented"
+	GOARCH=wasm GOOS=js go build -ldflags "-s -w" -o ./gh-pages/app.wasm cmd/vecty/main.go
+
+	git add -A
+	git commit --allow-empty -m "Deploy"
+	git subtree split --prefix gh-pages -b gh-pages
+	git push -f origin gh-pages:gh-pages
+	git branch -D gh-pages
