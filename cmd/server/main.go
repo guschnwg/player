@@ -12,11 +12,13 @@ import (
 
 func main() {
 	port := os.Getenv("PORT")
+	useGZip := os.Getenv("USE_GZIP")
 
 	http.Handle("/", &app.Handler{
 		Name:        "Hello",
 		Description: "An Hello World! example",
 		Title:       "Hello World!",
+		UseGZip:     useGZip == "true",
 		Styles: []string{
 			"https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css",
 			"/web/main.css",

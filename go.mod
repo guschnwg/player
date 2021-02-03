@@ -2,6 +2,8 @@ module github.com/guschnwg/player
 
 go 1.14
 
+replace github.com/maxence-charriere/go-app/v7 => github.com/guschnwg/go-app/v7 v7.3.5
+
 require (
 	github.com/PuerkitoBio/goquery v1.6.1 // indirect
 	github.com/antchfx/xmlquery v1.3.3 // indirect

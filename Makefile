@@ -5,6 +5,11 @@ client:
 client_watch:
 	GOARCH=wasm GOOS=js gow build -v -o ./web/app.wasm cmd/client/main.go
 
+client_compress_brotli:
+	brotli web/app.wasm
+client_compress_gzip:
+	gzip web/app.wasm --best --keep --force
+
 server:
 	go build -ldflags "-s -w" -o ./app.out cmd/server/main.go
 server_watch:
@@ -12,7 +17,7 @@ server_watch:
 
 docker_build:
 	docker build -t go-app .
-docker_build_tinygo: # does not work
+docker_build_tinygo: # does not work, maybe one day
 	docker run --rm -v $(shell pwd):/src -w /src tinygo/tinygo-dev tinygo build -o wasm.wasm -target=wasm cmd/client/main.go
 docker_run:
 	docker run -p 8000:8000 --name go-app -it --rm go-app
