@@ -44,3 +44,6 @@ gh_pages:
 	git push -f origin gh-pages:gh-pages
 	git branch -D gh-pages
 	git push
+
+skill_deploy:
+	ask deploy

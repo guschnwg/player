@@ -26,6 +26,8 @@ github.com/chromedp/chromedp v0.5.1/go.mod h1:3NMfuKTrKNr8PWEvHzdzZ57PK4jm9zW1C5
 github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDkc90ppPyw=
 github.com/dImrich/tinygo-wasmserve v0.0.0-20200816223752-e3e3b13f742e h1:w7TIMvLJo+jtlZcKwMKwQByQdPV6fuMBecKB+Q6Jzms=
 github.com/dImrich/tinygo-wasmserve v0.0.0-20200816223752-e3e3b13f742e/go.mod h1:gA0yhsvk4aSabspVzX/tBHn07gA+s+BkDhpao13vO40=
+github.com/dasjott/alexa-sdk-go v0.0.0-20200715083356-61e4c358718b h1:aegUqp7Kjr2oReECr+WYDgYnsgvhpeAeEX5GcL/sEis=
+github.com/dasjott/alexa-sdk-go v0.0.0-20200715083356-61e4c358718b/go.mod h1:WFr2+MT8EXlcmgHFkJ7xnvn07Ny0LWN41fbFQO/if7s=
 github.com/davecgh/go-spew v1.1.0 h1:ZDRjVQ15GmhC3fiQ8ni8+OwkZQO4DARzQgrnXU1Liz8=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
@@ -33,6 +35,8 @@ github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSs
 github.com/dustin/go-humanize v1.0.0/go.mod h1:HtrtbFcZ19U5GC7JDqmcUSB87Iq5E25KnS6fMYU6eOk=
 github.com/envoyproxy/go-control-plane v0.9.1-0.20191026205805-5f8ba28d4473/go.mod h1:YTl/9mNaCwkRvm6d1a2C3ymFceY/DCBVvsKhRF0iEA4=
 github.com/envoyproxy/protoc-gen-validate v0.1.0/go.mod h1:iSmxcyjqTsJpI2R4NaDN7+kN2VEUnK/pcBlmesArF7c=
+github.com/ericdaugherty/alexa-skills-kit-golang v0.0.0-20200820151434-52c9a4ba7aae h1:/uwCWnK3jBwxx32AVeKD2VRnxeZzGMqB49OSMgJc82U=
+github.com/ericdaugherty/alexa-skills-kit-golang v0.0.0-20200820151434-52c9a4ba7aae/go.mod h1:r8/hkaWbpP5pA0IXndFzpgY1cGlDFYVrXuwuNqjfZhE=
 github.com/fsnotify/fsnotify v1.4.7/go.mod h1:jwhsz4b93w/PPRr/qN1Yymfu8t87LnFCMoQvtojpjFo=
 github.com/fsnotify/fsnotify v1.4.9 h1:hsms1Qyu0jgnwNXIxa+/V/PDsU6CfLf6CNO8H7IWoS4=
 github.com/fsnotify/fsnotify v1.4.9/go.mod h1:znqG4EE+3YCdAaPaxE2ZRY/06pZUdp0tY4IgpuI1SZQ=

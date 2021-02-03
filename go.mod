@@ -9,6 +9,8 @@ require (
 	github.com/antchfx/xmlquery v1.3.3 // indirect
 	github.com/antchfx/xpath v1.1.11 // indirect
 	github.com/dImrich/tinygo-wasmserve v0.0.0-20200816223752-e3e3b13f742e // indirect
+	github.com/dasjott/alexa-sdk-go v0.0.0-20200715083356-61e4c358718b
+	github.com/ericdaugherty/alexa-skills-kit-golang v0.0.0-20200820151434-52c9a4ba7aae
 	github.com/gocolly/colly/v2 v2.1.0
 	github.com/golang/protobuf v1.4.3 // indirect
 	github.com/hexops/vecty v0.6.0

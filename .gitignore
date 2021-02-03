@@ -27,3 +27,5 @@
 **_vgen.go
 cmd/vugu/go.mod
 cmd/vugu/main_wasm.go
+
+.ask

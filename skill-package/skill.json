@@ -1,0 +1,52 @@
+{
+  "manifest": {
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "sslCertificateType": "Wildcard",
+          "uri": "https://40810f74fb1b.ngrok.io/alexa"
+        },
+        "interfaces": [
+          {
+            "type": "AUDIO_PLAYER"
+          }
+        ],
+        "regions": {
+          "NA": {
+            "endpoint": {
+              "sslCertificateType": "Wildcard",
+              "uri": "https://40810f74fb1b.ngrok.io/alexa"
+            }
+          },
+          "EU": {
+            "endpoint": {
+              "sslCertificateType": "Wildcard",
+              "uri": "https://toca-fita.herokuapp.com"
+            }
+          }
+        }
+      }
+    },
+    "manifestVersion": "1.0",
+    "publishingInformation": {
+      "category": "STREAMING_SERVICE",
+      "distributionCountries": [],
+      "isAvailableWorldwide": true,
+      "locales": {
+        "en-US": {
+          "name": "youtube player"
+        },
+        "pt-BR": {
+          "description": "Sample Full Description",
+          "examplePhrases": [
+            "Alexa abra youtube player"
+          ],
+          "keywords": [],
+          "name": "youtube player",
+          "summary": "Sample Short Description"
+        }
+      },
+      "testingInstructions": "Sample Testing Instructions."
+    }
+  }
+}
