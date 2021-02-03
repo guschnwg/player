@@ -15,6 +15,7 @@
 # vendor/
 
 .vscode
-*.wasm*
+*.wasm
+*.wasm.*
 
 ./app.out
