@@ -37,3 +37,4 @@ vecty_gh_pages:
 	git subtree split --prefix gh-pages -b gh-pages
 	git push -f origin gh-pages:gh-pages
 	git branch -D gh-pages
+	git push
