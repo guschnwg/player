@@ -19,6 +19,8 @@
 *.wasm.*
 
 !gh-pages/app.wasm
+!gh-pages/vugu.wasm
+!gh-pages/vecty.wasm
 
 ./app.out
 
