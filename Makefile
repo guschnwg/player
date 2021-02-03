@@ -20,7 +20,7 @@ docker_build:
 docker_build_tinygo: # does not work, maybe one day
 	docker run --rm -v $(shell pwd):/src -w /src tinygo/tinygo-dev tinygo build -o wasm.wasm -target=wasm cmd/client/main.go
 docker_run:
-	docker run -p 8000:8000 --name go-app -it --rm go-app
+	docker run -p 8000:8000 --env PORT=8000 --name go-app -it --rm go-app
 
 heroku_push:
 	heroku container:push web
