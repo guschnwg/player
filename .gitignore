@@ -18,4 +18,6 @@
 *.wasm
 *.wasm.*
 
+!gh-pages/app.wasm
+
 ./app.out
