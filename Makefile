@@ -30,8 +30,14 @@ heroku_logs:
 	heroku logs --tail
 
 vecty_gh_pages:
-	GOARCH=wasm GOOS=js go build -ldflags "-s -w" -o ./gh-pages/app.wasm cmd/vecty/main.go
+	GOARCH=wasm GOOS=js go build -ldflags "-s -w" -o ./gh-pages/vecty.wasm cmd/vecty/main.go
 
+vugu_gh_pages:
+	go generate cmd/vugu/generate.go
+
+	GOARCH=wasm GOOS=js go build -ldflags "-s -w" -o ./gh-pages/vugu.wasm cmd/vugu/main_wasm.go cmd/vugu/*_vgen.go
+
+gh_pages:
 	git add -A
 	git commit --allow-empty -m "Deploy"
 	git subtree split --prefix gh-pages -b gh-pages

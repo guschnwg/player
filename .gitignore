@@ -21,3 +21,6 @@
 !gh-pages/app.wasm
 
 ./app.out
+
+**_vgen.go
+cmd/vugu/go.mod
