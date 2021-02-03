@@ -28,3 +28,6 @@ heroku_deploy:
 	heroku container:release web
 heroku_logs:
 	heroku logs --tail
+
+vecty_gh_pages:
+	echo "Not implemented"
