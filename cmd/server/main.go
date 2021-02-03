@@ -31,6 +31,8 @@ func main() {
 	http.HandleFunc("/lyrics/test", server.TestLyrics)
 	http.HandleFunc("/beatport/test", server.TestBeatport)
 
+	http.HandleFunc("/alexa", server.Alexa)
+
 	server.BindProxy()
 
 	log.Println("Server running on port: " + port)

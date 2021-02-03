@@ -97,10 +97,18 @@ func (h *HelloWorld) OnSessionEnded(ctx context.Context, request *alexa.Request,
 
 // Alexa ...
 func Alexa(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w, r)
+
 	request := alexa.RequestEnvelope{}
+
 	decoder := json.NewDecoder(r.Body)
-	decoder.Decode(&request)
 	defer r.Body.Close()
+	err := decoder.Decode(&request)
+	if err != nil {
+		w.WriteHeader(500)
+		json.NewEncoder(w).Encode(err)
+		return
+	}
 
 	resp, _ := a.ProcessRequest(r.Context(), &request)
 

@@ -4,7 +4,7 @@
       "custom": {
         "endpoint": {
           "sslCertificateType": "Wildcard",
-          "uri": "https://40810f74fb1b.ngrok.io/alexa"
+          "uri": "https://evening-ridge-00695.herokuapp.com/alexa"
         },
         "interfaces": [
           {
@@ -15,13 +15,13 @@
           "NA": {
             "endpoint": {
               "sslCertificateType": "Wildcard",
-              "uri": "https://40810f74fb1b.ngrok.io/alexa"
+              "uri": "https://evening-ridge-00695.herokuapp.com/alexa"
             }
           },
           "EU": {
             "endpoint": {
               "sslCertificateType": "Wildcard",
-              "uri": "https://toca-fita.herokuapp.com"
+              "uri": "https://evening-ridge-00695.herokuapp.com/alexa"
             }
           }
         }
